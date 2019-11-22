@@ -13,6 +13,11 @@ class User(AbstractUser):
     )
 
 
+class Genre(models.Model):
+    name = models.CharField(max_length=50)
+    liked_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='liked_genres')
+
+
 class Movie(models.Model):
     title = models.CharField(max_length=50)
     poster_url = models.TextField()
@@ -21,11 +26,16 @@ class Movie(models.Model):
     description = models.TextField()
     grade = models.CharField(max_length=50)
     running_time = models.IntegerField()
+    naver_score = models.IntegerField()
     open_date = models.DateField()
-    genre = models.CharField(max_length=20)
+    genre = models.ForeignKey(Genre, related_name="movie", on_delete=models.CASCADE)
     liked_users =  models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='liked_movies')  # user model과 m:n관계 형성
     def __str__(self):
         return self.title
 
-class Genre(models.Model):
-    name = models.CharField(max_length=50)
+
+class Comment(models.Model):
+    content = models.CharField(max_length=200)
+    score = models.IntegerField()
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="comment", on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movie, related_name="comment", on_delete=models.CASCADE)
