@@ -11,11 +11,12 @@ class User(AbstractUser):
         settings.AUTH_USER_MODEL,
         related_name='followings'  # 팔로잉하는 사람들 가져오기 user.followings
     )
+    liked_genres = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='liked_users')
 
 
 class Genre(models.Model):
     name = models.CharField(max_length=50)
-    liked_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='liked_genres')
+    
 
 
 class Movie(models.Model):
@@ -26,8 +27,9 @@ class Movie(models.Model):
     description = models.TextField()
     grade = models.CharField(max_length=50)
     running_time = models.IntegerField()
-    naver_score = models.IntegerField()
+    naver_score = models.FloatField()
     open_date = models.DateField()
+    audience = models.IntegerField()
     genre = models.ForeignKey(Genre, related_name="movie", on_delete=models.CASCADE)
     liked_users =  models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='liked_movies')  # user model과 m:n관계 형성
     def __str__(self):
