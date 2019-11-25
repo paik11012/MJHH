@@ -316,3 +316,4 @@ $RECYCLE.BIN/
 # End of https://www.gitignore.io/api/vue,node,vuejs,python,django,windows,visualstudiocode
 
 venv/
+.env
