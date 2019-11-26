@@ -8,8 +8,9 @@ from datetime import datetime, timedelta
 from decouple import config
 from pprint import pprint
 from .models import Movie, Genre, Comment
-from .serializers import MovieSerializer, GenreSerializer, CommentSerializer, UserDetailSerializer, MovieDetailSerializer, GenreDetailSerializer
+from .serializers import MovieSerializer, GenreSerializer, CommentSerializer, UserDetailSerializer, MovieDetailSerializer, GenreDetailSerializer, UserSerializer, UserDetailSerializer
 import time
+from django.contrib.auth import get_user_model
 
 
 def update(request):
@@ -150,3 +151,31 @@ def comment_update_and_delete(request, comment_pk):
     else:
         comment.delete()
         return Response({'message': '코멘트가 삭제되었습니다.'})
+
+
+# @api_view(['GET'])
+# def userlist(request):
+#     users = get_user_model().objects.all()
+#     serializer = UserSerializer(users, many=True)
+#     return Response(serializer.data)
+
+
+# @api_view(['POST'])
+# def usercreate(request):
+#     serializer = UserSerializer(data=request.data)
+#     if serializer.is_valid(raise_exception=True):
+#         serializer.save()
+#     return Response(serializer.data)
+
+
+# @api_view(['PUT', 'DELETE'])
+# def userdetail(request, user_pk):
+#     user = get_object_or_404(get_user_model(), pk=user_pk)
+#     if request.method == 'PUT':
+#         serializer = UserSerializer(data=request.data, instance=user)
+#         if serializer.is_valid(raise_exception=True):
+#             serializer.save()
+#             return Response(serializer.data)
+#     else:
+#         user.delete()
+#         return Response({'message': '유저가 삭제되었습니다.'})
