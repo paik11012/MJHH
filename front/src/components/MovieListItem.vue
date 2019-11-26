@@ -1,8 +1,11 @@
 
 <template>
   <div class="col-3 my-3">
-    <img class="movie--poster my-3" :src="movie.poster_url" :alt="movie.id">
+    <img @click="onSelectMovie" class="movie--poster my-3" :src="movie.poster_url" :alt="movie.id">
+    
     <h3>{{ movie.title }}</h3>
+    <br>
+
     <!-- <button class="btn btn-primary" data-toggle="modal" :data-target="`#movie-${movie.id}`">
       영화 정보 상세보기
     </button> -->
@@ -19,6 +22,14 @@ export default {
       required: true
     }
   },
+  components: {
+  },
+  methods: {
+    onSelectMovie: function(movie) {
+      console.log(movie.target.alt)
+      this.selectMovie = movie.target.alt
+    }
+  }
 }
 </script>
 
