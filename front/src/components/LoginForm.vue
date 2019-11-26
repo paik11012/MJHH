@@ -54,7 +54,6 @@ export default {
       if (this.checkForm()){
         this.loading = true
         const SERVER_IP = process.env.VUE_APP_SERVER_IP
-        console.log(process.env)
         axios.post(SERVER_IP + '/api-token-auth/', this.credentials)
           .then(response=>{
             this.$session.start()
