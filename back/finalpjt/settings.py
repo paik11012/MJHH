@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-SITE_ID = 1
 
 REST_USE_JWT = True
 

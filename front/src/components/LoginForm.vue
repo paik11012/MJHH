@@ -10,13 +10,13 @@
         <div v-for="(error, idx) in errors" :key="idx">{{ error }}</div>
       </div>
       <div class="form-group">
-        <label for="id">ID</label>
+        <label for="username">USER NAME</label>
         <input
           type="text"
-          id="id"
+          id="username"
           class="form-control"
           placeholder="아이디를 입력해주세요"
-          v-model="credentials.username"
+          v-model="username"
         />
       </div>
       <div class="form-group">
@@ -26,62 +26,30 @@
           id="password"
           class="form-control"
           placeholder="비밀번호를 입력해주세요"
-          v-model="credentials.password"
+          v-model="password"
         />
       </div>
-      <button class="btn btn-success" @click="login">Login</button>
+      <button class="btn btn-success" @click="login({username, password})">Login</button>
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
-import router from '@/router'
+import {mapState, mapActions} from 'vuex'
 export default {
-  name: "LoginForm",
   data() {
     return {
-      credentials: {
-        username: "",
-        password: ""
-      },
-      loading: false,
-      errors: [],
-    };
+      username: null,
+      password: null
+    }
+  },
+  computed: {
+    ...mapState(["isLogin", "isLoginError"])
   },
   methods: {
-    login() {
-      if (this.checkForm()){
-        this.loading = true
-        const SERVER_IP = process.env.VUE_APP_SERVER_IP
-        axios.post(SERVER_IP + '/api-token-auth/', this.credentials)
-          .then(response=>{
-            this.$session.start()
-            this.$session.set('jwt', response.data.token)
-            this.$store.dispatch('login', response.data.token)
-            this.loading = false
-            router.push('/')
-          })
-          .catch(error=>{
-            console.log(error)
-            this.loading = false
-          })
-      }
-    },
-    checkForm(){
-      this.errors = []
-      if (!this.credentials.username){
-        this.errors.push('아이디를 입력해주세요')
-      }
-      if (this.credentials.password.length < 8){
-        this.errors.push('비밀번호는 8글자 이상 입력해주세요')
-      }
-      if (this.errors.length === 0){
-        return true
-      }
-    },
-  }
-};
+  ...mapActions(["login"])
+  },
+}
 </script>
 
 <style>

@@ -3,6 +3,8 @@ from bs4 import BeautifulSoup
 from urllib.request import urlopen
 import csv
 
+#  csv파일에서 링크를 가져와서 프린트하는 파이썬 파일
+
 f = open('movie_naver.csv', 'r', encoding='utf-8')
 csv_file = csv.reader(f)
 for line in csv_file:
@@ -19,5 +21,5 @@ for line in csv_file:
     final = img.split('src=')
     final_url = final[-1]
     final_url = final_url[1:-3]
-    print(final_url)
+    print(final_url, line)
 f.close
