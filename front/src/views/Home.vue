@@ -1,19 +1,14 @@
 <template>
   <div class="home">
-    <HelloWorld />
-    <img :src="url" alt="image">
-    <p v-html="msg"></p>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name: 'home',
   components: {
-    HelloWorld
   },
   data() {
     return {

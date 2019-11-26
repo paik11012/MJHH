@@ -38,4 +38,10 @@ class UserDetailSerializer(serializers.ModelSerializer):
     comment = CommentSerializer(many=True)
     class Meta:
         model = User
-        fields = ['followers', 'comment', ]
+        fields = ['id', 'followers', 'comment', ]
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'password', 'email', ]
