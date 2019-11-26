@@ -1,29 +1,54 @@
 <template>
   <div class="movie-list">
-    <!-- <h1>영화 목록</h1>
+    <h1>영화 목록</h1>
     <h2>장르 선택</h2>
-    <select class="form-control" v-model="genrename">
-      <option>전체</option>
-      <option v-for="genre in genres" v-bind:key="genre.id">{{genre.name}}</option>
+    <select class="form-control" v-model="genreid">
+      <option value=0>전체</option>
+      <option v-for="genre in genres" v-bind:key="genre.id" :value="genre.id">{{genre.name}}</option>
     </select>
     <div class="row mt-5">
-      <movielistitem v-for="movie in movieList" :movie="movie" :key="movie.id" />
-    </div> -->
+      <MovieListItem v-for="movie in movieList" :movie="movie" :key="movie.id" />
+    </div>
   </div>
 </template>
 
 <script>
+import MovieListItem from "@/components/MovieListItem.vue";
+
 export default {
   name: "MovieList",
+  components: {
+    MovieListItem
+  },
+  data() {
+    return {
+      genreid: 0
+    };
+  },
   props: {
     movies: {
       type: Array,
-      required: true,
+      required: true
+    },
+    genres: {
+      type: Array,
+      required: true
     }
   },
-}
+  computed: {
+    movieList: function() {
+      if (this.genreid != 0) {
+        const genre = this.genres.filter(
+          genre => genre.id === this.genreid
+        );
+        return this.movies.filter(movie => movie.genre === genre[0].id);
+      } else {
+        return this.movies;
+      }
+    }
+  }
+};
 </script>
 
 <style>
-
 </style>

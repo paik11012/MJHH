@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
 import requests
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
@@ -91,6 +92,7 @@ def update(request):
 
 
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def movielist(request):
     movies = Movie.objects.all()
     serializer = MovieSerializer(movies, many=True)
@@ -98,6 +100,7 @@ def movielist(request):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes([AllowAny])
 def moviedetail(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     if request.method == 'GET':
@@ -121,12 +124,14 @@ def create(request):
 
 
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def genrelist(request):
     genres = Genre.objects.all()
     serializer = GenreSerializer(genres, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def genredetail(request, genre_pk):
     genre = get_object_or_404(Genre, pk=genre_pk)
     if request.method == 'GET':
@@ -153,11 +158,11 @@ def comment_update_and_delete(request, comment_pk):
         return Response({'message': '코멘트가 삭제되었습니다.'})
 
 
-# @api_view(['GET'])
-# def userlist(request):
-#     users = get_user_model().objects.all()
-#     serializer = UserSerializer(users, many=True)
-#     return Response(serializer.data)
+@api_view(['GET'])
+def userlist(request):
+    users = get_user_model().objects.all()
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data)
 
 
 # @api_view(['POST'])

@@ -17,7 +17,6 @@ export default new Vuex.Store({
       state.isLogin = true;
       state.isLoginError = false;
       state.userInfo = payload;
-      //payload 에 대한 정보는 위키피디아를 참고했다. 쉽게 말해 userInfo에 배정되는 실제 유저 정보를 할당한다고 보면 된다. 
     },
     loginError(state) { //로그인 실패시,
       state.isLogin = false;
@@ -32,33 +31,28 @@ export default new Vuex.Store({
   },
   actions: {
     login(dispatch, loginObj) {
-      // login --> 토큰 반환
-      axios
-        .post("http://127.0.0.1:8000/api/rest-auth/login/", loginObj)
-        // loginObj = {email,password}를 받아온다.
+      const SERVER_IP = process.env.VUE_APP_SERVER_IP
+      axios.post(SERVER_IP + "/rest-auth/login/", loginObj)
         .then(res => {
-          // 접근 성공시, 토큰 값이 반환된다. (실제로는 토큰과 함께 유저 id를 받아온다.)
-          // 토큰을 헤더 정보에 포함시켜서 유저 정보를 요청
           let token = res.data.token;
-          //토큰을 로컬 스토리지에 저장
-          localStorage.setItem("access_token", token); //로컬 스토리지에 토큰 저장
-          this.dispatch("getMemberInfo");
-          router.push({ name: "home" });
-          console.log(res);
+          localStorage.setItem("access_token", token);
+          // this.commit('loginSuccess', token)
+          router.push({name: "home"});
         })
         .catch(() => {
-          alert("이메일과 비밀번호를 확인하세요.");
+          // this.commit('loginError')
+          alert("아이디와 비밀번호를 확인하세요.");
         });
     },
-    logout({ commit }) {
-      commit("logout");
-      router.push({ name: "home" });
+    logout(context) {
+      context.commit('logout');
+      // router.push({ name: "home"});
+      localStorage.setItem("access_token", null)
+
     },
     signup(dispatch, loginObj) {
-      // login --> 토큰 반환
-      axios
-        .post("http://127.0.0.1:8000/api/rest-auth/registration/", loginObj)
-        // loginObj = {email,password}
+      const SERVER_IP = process.env.VUE_APP_SERVER_IP
+      axios.post(SERVER_IP + "/rest-auth/registration/", loginObj)
         .then(res => {
           alert("회원가입이 성공적으로 이뤄졌습니다.");
           router.push({ name: "login" });

@@ -16,7 +16,7 @@
         type="submit"
         class="button"
         name="submit"
-        @click="singup({username, email, password1, password2})"
+        @click="signup({username, email, password1, password2})"
         value="회원가입"
       />
     </div>
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { masState, mapActions } from "vuex"
+import { mapActions } from "vuex"
 
 export default {
   data() {
@@ -36,7 +36,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["singup"])
+    ...mapActions(["signup"])
   }
 }
 

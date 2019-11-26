@@ -1,13 +1,14 @@
 <template>
   <div id="app">
     <div id="nav">
-      <div v-if="isLoggedIn">
+      <!-- <div v-if="isLogIn"> -->
         <router-link to="/">Home</router-link> |
-        <a @click.prevent="logout" href="/logout">Logout</a>
-      </div>
-      <div v-else>
-        <router-link to="/login">Login</router-link>
-      </div>
+        <a @click="logout">Logout</a> |
+      <!-- </div> -->
+      <!-- <div v-else> -->
+        <router-link to="/login">Login</router-link> |
+        <router-link to="/signup">SignUp</router-link>
+      <!-- </div> -->
     </div>
     <div class="container col-6">
       <router-view/>
@@ -16,30 +17,15 @@
 </template>
 
 <script>
-import router from '@/router'
+// import router from '@/router'
+import { mapState, mapActions } from "vuex"
 export default {
   name: 'App',
-  data(){
-    return {
-    }
-  },
-  mounted(){
-    if(this.$session.has('jwt')){
-      const token = this.$session.get('jwt')
-      this.$store.dispatch('login', token)
-    }
+  methods: {
+    ...mapActions(["logout"])
   },
   computed: {
-    isLoggedIn() {
-      return this.$store.getters.isLoggedIn
-    }
-  },
-  methods: {
-    logout(){
-      this.$session.destroy()
-      this.$store.dispatch('logout')
-      router.push('/login')
-    },
+    ...mapState(["isLogin"])
   },
 }
 </script>
