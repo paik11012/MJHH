@@ -1,9 +1,11 @@
+# movie2.csv파일에서 무비코드를 읽어와 이와 일치하는 네이버의 무비코드를 가져와 그 무비 정보로 가는 네이버 링크를 cmovie_naver.csv파일로 저장
+
+
 # 비로그인 오픈 API이므로 GET으로 호출할 때 HTTP Header에 애플리케이션 등록 시 발급받은 Client ID와 Client Secret 값을 같이 전송해 주시면 활용 가능
 import requests
 from pprint import pprint
 from decouple import config
 import time
-#포문 안에서
 import csv
 BASE_URL = 'https://openapi.naver.com/v1/search/movie.json'
 CLIENT_ID = config('CLIENT_ID')
