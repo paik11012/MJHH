@@ -1,7 +1,8 @@
 <template>
   <div class="movie-list">
-    <h1>영화 목록</h1>
-    <h3>장르 선택</h3>
+    <h2>영화 목록</h2>
+    <br>
+    <h4>장르 선택</h4>
     <select class="form-control" v-model="genreid" id="select-genre">
       <option value=0>전체</option>
       <option v-for="genre in genres" v-bind:key="genre.id" :value="genre.id">{{genre.name}}</option>

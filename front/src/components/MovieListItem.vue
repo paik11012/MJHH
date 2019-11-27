@@ -19,9 +19,10 @@
         <img :src="movie.poster_url" alt="movie poster" id="movie-detail-image" />
         <h5>감독 {{movie.director}}</h5>
         <h5>배우 {{movie.actor}}</h5>
-        <h5>{{movie.running_time}}분</h5>
-        <h5>{{movie.grade}}</h5>
         <h5>{{movie.open_date}}</h5>
+        <h5>{{movie.grade}}</h5>
+        <h5>{{movie.running_time}}분</h5>
+        
         <!-- like 구현 -->
 
         <br />
@@ -30,10 +31,11 @@
         <br />
         <br />
         <h4>Reviews</h4>
+        <h4>{{userInfo}}</h4>
         <span>점수 <input v-model="score" type="number" name="score" id="score" max=10 min=0></span>
         <textarea v-model="content" name="textarea" id="content" cols="100" rows="3"></textarea>
         <b-button class="btn btn-dark" size="sm">작성</b-button>
-        <!-- <span>{{this.state.userInfo}}</span> -->
+        <!-- <h2>{{userInfo}}</h2> -->
         <!-- 쓴 커멘트 보여주기 -->
         
 
@@ -46,8 +48,10 @@
 </template>
 
 <script>
+// import userInfo from "@/store/index.js";
 export default {
   name: "MovieListItem",
+  // name: "userInfo",
 
   data() {
     return {
