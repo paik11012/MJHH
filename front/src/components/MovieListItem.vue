@@ -35,7 +35,6 @@
         <span>점수 <input v-model="score" type="number" name="score" id="score" max=10 min=0></span>
         <textarea v-model="content" name="textarea" id="content" cols="100" rows="3"></textarea>
         <b-button class="btn btn-dark" size="sm">작성</b-button>
-        <!-- <h2>{{userInfo}}</h2> -->
         <!-- 쓴 커멘트 보여주기 -->
         
 
