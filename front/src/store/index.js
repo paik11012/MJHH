@@ -38,8 +38,11 @@ export default new Vuex.Store({
           localStorage.setItem("access_token", token);
           // this.commit('loginSuccess', token)
           router.push({name: "home"});
-          // userinfo 객체 새롭게 만들어서 그곳에 token, loginobject의 username을 저장한다. 
-          const userInfo = (token, loginObj.username)
+          // userinfo 객체 새롭게 만들어서 그곳에 token, loginobject의 username을 저장한다. object 만들기
+          const userInfo = {
+            token: token,
+            username: loginObj.username
+          }
           context.commit("loginSuccess", userInfo)
           // console.log(this.state)
         })

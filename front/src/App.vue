@@ -1,5 +1,6 @@
 <template>
-  <div id="app" class="p-3 mb-2 bg-dark text-white">
+  <div id="app" class="shadow p-3 mb-2 bg-dark text-white" >
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif+KR|Stylish&display=swap" rel="stylesheet">
     <div id="nav">
       <!-- <div v-if="isLogIn"> -->
         <router-link to="/">Home</router-link> |
@@ -19,6 +20,7 @@
 <script>
 // import router from '@/router'
 import { mapState, mapActions } from "vuex"
+
 export default {
   name: 'App',
   methods: {
@@ -33,8 +35,10 @@ export default {
 
 
 #app {
+  font-family: 'Stylish', sans-serif;
+  /* font-family: 'Noto Serif KR', serif; */
   min-height: 1000px;
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  /* font-family: 'Avenir', Helvetica, Arial, sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

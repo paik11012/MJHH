@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import MovieListItem from "@/components/MovieListItem.vue";
 
 
@@ -22,6 +23,7 @@ export default {
     MovieListItem
   },
   data() {
+
     return {
       genreid: 0
     };
@@ -37,6 +39,9 @@ export default {
     }
   },
   computed: {
+    ...mapState([
+      "userInfo"
+    ]),
     movieList: function() {
       if (this.genreid != 0) {
         const genre = this.genres.filter(
@@ -47,7 +52,7 @@ export default {
         return this.movies;
       }
     }
-  }
+  },
 };
 </script>
 

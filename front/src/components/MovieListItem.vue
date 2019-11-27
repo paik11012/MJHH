@@ -5,6 +5,7 @@
 
     <div>
       <b-modal
+        hide-footer
         v-model="show"
         id="movie-modal"
         size="lg"
@@ -30,13 +31,11 @@
         <br />
         <br />
         <h4>Reviews</h4>
-        <span>점수 <input v-model="score" type="number" name="score" id="score" max=10 min=0></span>
-        <textarea v-model="content" name="textarea" id="content" cols="100" rows="3"></textarea>
-        <b-button class="btn btn-dark" size="sm">작성</b-button>
-        <!-- <span>{{this.state.userInfo}}</span> -->
+        <span>평점 <input type="number" v-model="score" max=10 min=0 id="score"></span>
+        <textarea  name="inputContent" v-model="content" cols="100" rows="3" id="content"></textarea>
+        <b-button @click="onSubmit" class="btn btn-dark" size="sm">작성</b-button>
+        <!-- <span>{{userInfo.username}}</span> -->
         <!-- 쓴 커멘트 보여주기 -->
-        
-
         
       </b-modal>
     </div>
@@ -46,13 +45,17 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "MovieListItem",
+
 
   data() {
     return {
       content:'',
-      score:0,
+      contentList: [],
+      score: 0,
+      scoreList: [],
       show: false,
       variants: ["light", "dark"],
       headerBgVariant: "dark",
@@ -62,6 +65,12 @@ export default {
       footerBgVariant: "dark",
       footerTextVariant: "dark"
     };
+  },
+  computed: {
+    ...mapState([
+      "userInfo"
+    ])
+ 
   },
   props: {
     movie: {
@@ -77,14 +86,23 @@ export default {
       this.show = true;
     },
     onSubmit() {
-      this.$emit('createReview', this.content)
+      // this.score = score.value
+      this.scoreList.push(this.score)
+      this.contentList.push(this.content)
+      // 여기 있는 정보를 sqlite에 저장해야 함
+      // 위 컴포넌트에서 가져오기(user, content, score)
+      // console.log(this.name)
       this.content=''
-    }
+      this.score=0
+    },
   }
 };
 </script>
 
 <style>
+#movie-modal{
+  font-family: 'Stylish', sans-serif;
+}
 #score{
   background-color: #343A40;
   color:white
@@ -99,6 +117,7 @@ export default {
 }
 #movie-title {
   font-size: 21px;
+  text-align: center
 }
 #movie-detail-image {
   width: 400px;

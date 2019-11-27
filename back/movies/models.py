@@ -35,9 +35,9 @@ class Movie(models.Model):
     def __str__(self):
         return self.title
 
-
+# comment
 class Comment(models.Model):
     content = models.CharField(max_length=200)
     score = models.IntegerField()
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="comment", on_delete=models.CASCADE)
-    movie = models.ForeignKey(Movie, related_name="comment", on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="comments", on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movie, related_name="comments", on_delete=models.CASCADE)
