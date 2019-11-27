@@ -3,7 +3,7 @@
   <div class="col-3 my-3">
     <img @click="onSelectMovie" class="movie--poster my-3" :src="movie.poster_url" :alt="movie.id">
     
-    <h3>{{ movie.title }}</h3>
+    <h3 id="movie-title">{{ movie.title }}</h3>
     <br>
 
     <!-- <button class="btn btn-primary" data-toggle="modal" :data-target="`#movie-${movie.id}`">
@@ -36,5 +36,8 @@ export default {
 <style>
 .movie--poster {
   width: 200px;
+}
+#movie-title {
+  font-size: 21px
 }
 </style>

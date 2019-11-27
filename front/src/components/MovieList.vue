@@ -2,7 +2,7 @@
   <div class="movie-list">
     <h1>영화 목록</h1>
     <h3>장르 선택</h3>
-    <select class="form-control" v-model="genreid">
+    <select class="form-control" v-model="genreid" id="select-genre">
       <option value=0>전체</option>
       <option v-for="genre in genres" v-bind:key="genre.id" :value="genre.id">{{genre.name}}</option>
     </select>
@@ -52,4 +52,9 @@ export default {
 </script>
 
 <style>
+#select-genre {
+  background-color:#2E2E2E ;
+  color: white
+}
+
 </style>
