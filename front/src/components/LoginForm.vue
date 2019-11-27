@@ -1,7 +1,7 @@
 <template>
   <div class="login-div">
     <div class="form-group">
-      <label for="username">ID:</label>
+      <label for="username">ID </label>
       <input
         type="text"
         id="username"
@@ -10,7 +10,7 @@
         v-model="username"
       />
       <div class="form-group">
-        <label for="password">Password:</label>
+        <label for="password">Password </label>
         <input
           type="password"
           id="password"
@@ -19,8 +19,8 @@
           v-model="password"
         />
       </div>
-      <button class="btn btn-success" @click="login({username, password})">Login</button>
-    </div>
+      <button class="btn btn-primary" @click="login({username, password})">Login</button>
+    </div>                
   </div>
 </template>
 

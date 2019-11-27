@@ -30,7 +30,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    login(dispatch, loginObj) {
+    login(context, loginObj) {
       const SERVER_IP = process.env.VUE_APP_SERVER_IP
       axios.post(SERVER_IP + "/rest-auth/login/", loginObj)
         .then(res => {
@@ -38,6 +38,10 @@ export default new Vuex.Store({
           localStorage.setItem("access_token", token);
           // this.commit('loginSuccess', token)
           router.push({name: "home"});
+          // userinfo 객체 새롭게 만들어서 그곳에 token, loginobject의 username을 저장한다. 
+          const userInfo = (token, loginObj.username)
+          context.commit("loginSuccess", userInfo)
+          // console.log(this.state)
         })
         .catch(() => {
           // this.commit('loginError')

@@ -53,7 +53,7 @@ export default {
 
 <style>
 #select-genre {
-  background-color:#2E2E2E ;
+  background-color:#343A40 ;
   color: white
 }
 

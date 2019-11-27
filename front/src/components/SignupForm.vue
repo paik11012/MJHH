@@ -11,16 +11,17 @@
       <input type="password" v-model="password2" name="userpassword" label="비밀번호 확인" />
       <br />
     </form>
+    <br>
     <div class="login-btn">
       <input
         type="submit"
-        class="button"
+        class="btn btn-primary"
         name="submit"
         @click="signup({username, email, password1, password2})"
         value="회원가입"
       />
     </div>
-  </div>
+  </div>   
 </template>
 
 <script>
