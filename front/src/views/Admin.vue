@@ -1,6 +1,6 @@
   
 <template>
-  <div id="Admin">
+  <div>
     <AdminPage />
   </div>
 </template>

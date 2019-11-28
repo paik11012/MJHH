@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="adminPage">
 		<h1>영화 목록</h1>
 
   </div>
