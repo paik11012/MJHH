@@ -20,9 +20,9 @@
         <img :src="movie.poster_url" alt="movie poster" id="movie-detail-image" />
         <h5>감독 {{movie.director}}</h5>
         <h5>배우 {{movie.actor}}</h5>
-        <h5>{{movie.running_time}}분</h5>
         <h5>{{movie.grade}}</h5>
-        <h5>{{movie.open_date}}</h5>
+        <h5>{{movie.open_date}} 개봉</h5>
+        <h5>{{movie.running_time}}분</h5>
         <!-- like 구현 -->
 
         <br />
