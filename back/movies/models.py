@@ -31,7 +31,7 @@ class Movie(models.Model):
     open_date = models.DateField()
     audience = models.IntegerField()
     genre = models.ForeignKey(Genre, related_name="movie", on_delete=models.CASCADE)
-    liked_users =  models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='liked_movies')  # user model과 m:n관계 형성
+    liked_users =  models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='liked_movies', blank=True)  # user model과 m:n관계 형성
     def __str__(self):
         return self.title
 

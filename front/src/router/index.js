@@ -39,7 +39,7 @@ const routes = [
     path: '/:name',
     name: 'search',
     component: Search
-  }
+  },
 ]
 
 const router = new VueRouter({

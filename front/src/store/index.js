@@ -62,10 +62,9 @@ export default new Vuex.Store({
     signup(dispatch, loginObj) {
       const SERVER_IP = process.env.VUE_APP_SERVER_IP
       axios.post(SERVER_IP + "/rest-auth/registration/", loginObj)
-        .then(res => {
+        .then(() => {
           alert("회원가입이 성공적으로 이뤄졌습니다.");
           router.push({ name: "login" });
-          console.log(res);
         })
         .catch(() => {
           alert("이메일과 비밀번호를 확인하세요.");

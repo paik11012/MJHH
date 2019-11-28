@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="shadow p-3 mb-2 bg-dark text-white">
+  <div id="app" class="shadow p-3 mb-2 bg-dark text-white" >
     <b-navbar toggleable="lg" type="dark" variant="dark">
       <b-navbar-brand to="/">Movies</b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -29,6 +29,7 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
+    <img src="./assets/sea.png" alt="" height="300px" id="image">
     <link
       href="https://fonts.googleapis.com/css?family=Noto+Serif+KR|Stylish&display=swap"
       rel="stylesheet"
@@ -79,6 +80,9 @@ export default {
 };
 </script>
 <style>
+#image{
+  width: max-content
+}
 #app {
   font-family: "Stylish", sans-serif;
   /* font-family: 'Noto Serif KR', serif; */
