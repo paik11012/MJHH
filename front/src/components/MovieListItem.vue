@@ -2,8 +2,6 @@
 <template>
   <div class="col-3 my-3">
     <button class="btn btn-dark" type="submit"><img @click="onSelectMovie" class="movie--poster my-3" :src="movie.poster_url" :alt="movie.id" /></button>
-    
-
     <div>
       <b-modal
         hide-footer
