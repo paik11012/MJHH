@@ -27,7 +27,7 @@
         <br />
         <span>{{movie.description}}</span>
         <!-- comment 구현 -->
-        <br /><br /><br><br><br><br><br><br><br>
+        <br /><br /><br><br><br><br><br><br><br><br>
         <h4>Reviews</h4>
         <span>평점: <input type="number" v-model="score" max=10 min=0 id="score"></span><br><br>
         <textarea  name="inputContent" v-model="content" cols="100" rows="3" id="content"></textarea>
@@ -40,6 +40,14 @@
                   {{ comment.score }} | {{ comment.content }}
                 </p>
               </span>
+              <p v-if="comment.user_id === this.$store.state.userInfo.userpk">
+                <button @click="checkcomment(comment.pk)">수정</button>
+                <!-- <div v-if="commentupdate === comment.pk">
+                  score: <input type="number" :value="comment.score" v-model="modifycontent" max=10 min=0>
+                  content: <input type="text" :value="comment.content" v-model="modifyscore">
+                </div> -->
+                <button @click="commentdelete(comment.pk)">삭제</button>
+              </p>
             </li>
           </div>
         </ul>
@@ -62,8 +70,11 @@ export default {
     return {
       content:'',
       score: 0,
+      modifycontent: '',
+      modifyscore: 0,
       userlist: [],
       show: false,
+      commentupdate: null,
       variants: ["light", "dark"],
       headerBgVariant: "dark",
       headerTextVariant: "light",
@@ -116,12 +127,41 @@ export default {
         .catch(()=>{
           alert('Fail')
         })
+    },
+    checkcomment: function(commentpk){
+      this.commentupdate = commentpk
+    },
+    commentmodify: function(commentpk){
+      const SERVER_IP = process.env.VUE_APP_SERVER_IP
+      const commentObj = {
+        "content": this.modifycontent,
+        "score": this.modifyscore
+        // "user_id": this.$store.state.userInfo.userpk
+      }
+      axios.put(`${SERVER_IP}/api/v1/comment_update_and_delete/${commentpk}`, commentObj)
+        .then(response=>{
+          console.log(response)
+          this.commentupdate = null
+        })
+        .catch(error=>{
+          console.log(error)
+        })
+    },
+    commentdelete: function(commentpk){
+      const SERVER_IP = process.env.VUE_APP_SERVER_IP
+      axios.delete(`${SERVER_IP}/api/v1/comment_update_and_delete/${commentpk}`)
+        .then(response=>{
+          console.log(response)
+        })
+        .catch(error=>{
+          console.log(error)
+        })
     }
   },
   mounted() {
     this.getuser()
   }
-};
+}
 </script>
 
 <style>

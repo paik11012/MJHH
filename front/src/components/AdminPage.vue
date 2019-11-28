@@ -9,7 +9,7 @@
     <br>
     <div>
       <b-button v-b-modal.modal-1 class="btn btn-success">추가</b-button>
-      <b-modal id="modal-1" title="Add Movie"
+      <b-modal hide-footer id="modal-1" title="Add Movie"
         :header-bg-variant="headerBgVariant"
         :header-text-variant="headerTextVariant"
         :body-bg-variant="bodyBgVariant"
@@ -17,15 +17,18 @@
         :footer-bg-variant="footerBgVariant"
         :footer-text-variant="footerTextVariant"
       >
-        <!-- <button @click="onModify(movie.id)" class="btn btn-danger" type="submit" id="modi">수정</button> -->
         제목: <input type="text" v-model="title" id="title"> <br>
         포스터url: <input type="text" v-model="poster_url" id="poster_url"><br>
         감독: <input type="text" v-model="director" id="director"><br>
         배우: <input type="text" v-model="actor" id="actor"><br>
-        개봉일: <input type="text" v-model="open_date" id="open_date"><br>
-        상영시간: <input type="text" v-model="running_time" id="running_time"><br>
-        장르: <input type="text" v-model="genre" id="genre"><br>
-        상세정보: <textarea name="" id="" cols="40" v-model="description" rows="12"></textarea>
+        등급: <input type="text" v-model="grade" id="grade"><br>
+        네이버 평점: <input type="number" step="0.01" v-model="naver_score" id="naver_score"><br>
+        관객: <input type="number" v-model="audience" id="audience"><br>
+        개봉일: <input type="date" v-model="open_date" id="open_date"><br>
+        상영시간: <input type="number" v-model="running_time" id="running_time"><br>
+        장르: <input type="number" v-model="genre" id="genre"><br>
+        상세정보: <textarea name="" id="" cols="40" v-model="description" rows="12"></textarea>&nbsp;&nbsp;
+        <button @click="addMovie" class="btn btn-success">추가</button>
       </b-modal>
     </div>
     <div class="row mt-5">
@@ -37,6 +40,8 @@
 <script>
 // import axios from "axios";
 import { mapState } from "vuex";
+import axios from "axios";
+import router from "@/router";
 import MovieListItem from "@/components/MovieListItemAdmin.vue";
 
 
@@ -54,9 +59,12 @@ export default {
       actor: '',
       running_time:'',
       grade: '',
+      audience: 0,
+      naver_score: 0,
       description: '',
       open_date:'',
-      genre:'',
+      genre: 0,
+
       variants: ["light", "dark"],
       headerBgVariant: "dark",
       headerTextVariant: "light",
@@ -76,15 +84,33 @@ export default {
       required: true
     }
   },
-  // methdos: {
-  //   addMovie: function(){
-  //     const SERVER_IP = process.env.VUE_APP_SERVER_IP
-  //     axios.post(`${SERVER_IP}/api/v1/create/`)
-  //       .then(response=>{
-
-  //       })
-  //   }
-  // },
+  methods: {
+    addMovie: function(){
+      const SERVER_IP = process.env.VUE_APP_SERVER_IP
+      const movie = {
+        "title": this.title,
+        "poster_url": this.poster_url,
+        "director": this.director,
+        "actor": this.actor,
+        "description": this.description,
+        "grade": this.grade,
+        "running_time": this.running_time,
+        "naver_score" : this.naver_score,
+        "open_date": this.open_date,
+        "audience": this.audience,
+        "genre": this.genre,
+        "liked_users": [1]
+      }
+      axios.post(`${SERVER_IP}/api/v1/create/`, movie)
+        .then(response=>{
+          console.log(response)
+          router.push('/')
+        })
+        .catch(error=>{
+          console.log(error)
+        })
+    }
+  },
   computed: {
     ...mapState([
       "userInfo"

@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 from decouple import config
 from pprint import pprint
 from .models import Movie, Genre, Comment
-from .serializers import MovieSerializer, GenreSerializer, CommentSerializer, UserDetailSerializer, MovieDetailSerializer, GenreDetailSerializer, UserSerializer, UserDetailSerializer, MovieUpdateSerializer
+from .serializers import MovieSerializer, GenreSerializer, CommentSerializer, UserDetailSerializer, GenreDetailSerializer, UserSerializer, UserDetailSerializer, MovieUpdateSerializer
 import time
 from django.contrib.auth import get_user_model
 
@@ -95,7 +95,7 @@ def update(request):
 def moviedetail(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     if request.method == 'GET':
-        serializer = MovieDetailSerializer(movie)
+        serializer = MovieSerializer(movie)
         return Response(serializer.data)
     elif request.method == 'PUT':
         serializer = MovieUpdateSerializer(data=request.data, instance=movie)
@@ -118,6 +118,7 @@ def movielist(request):
 
     
 @api_view(['POST'])
+@permission_classes([AllowAny])
 def create(request):
     serializer = MovieSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
