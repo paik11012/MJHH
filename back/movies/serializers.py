@@ -7,7 +7,7 @@ User = get_user_model()
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = ['content', 'score', 'movie_id', 'user_id']
+        fields = ['id', 'content', 'score', 'movie_id', 'user_id']
 
 
 class MovieSerializer(serializers.ModelSerializer):

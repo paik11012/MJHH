@@ -5,6 +5,7 @@ import Login from '../views/Login.vue'
 import Singup from '../views/Signup.vue'
 import Admin from '../views/Admin.vue'
 import User from '../views/UserPage.vue'
+import Search from '../views/Search.vue'
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/user/:id',
     name: 'user',
     component: User
+  },
+  {
+    path: '/:name',
+    name: 'search',
+    component: Search
   }
 ]
 
