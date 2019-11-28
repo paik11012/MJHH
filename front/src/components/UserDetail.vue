@@ -1,9 +1,18 @@
 <template>
   <div class="user">
-    {{ username }}
-    {{ useremail }}
-    {{ comments }}
-    {{ followers }}
+    <h2>My Info</h2>
+    <br>
+    <img width="300px" src="http://file.mk.co.kr/meet/neds/2019/11/image_readtop_2019_983208_15747235963989824.jpg" alt="">
+    <br>
+    <br>
+    <h3>ID: {{ username }}</h3>
+    <h3>Email: {{ useremail }}</h3>
+    <h3>Comments: {{ comments }}</h3>
+    <h3>Followers: {{ followers }}</h3>
+    
+    
+    
+    
   </div>
 </template>
 

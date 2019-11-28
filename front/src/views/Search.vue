@@ -4,8 +4,8 @@
     <div class="row mt-5" v-if="searchResult.length >= 1">
       <MovieListItem v-for="movie in searchResult" :movie="movie" :key="movie.id" />
     </div>
-    <div class="row mt-5" v-else>
-      <h2 class="text-center">검색 결과를 찾을 수 없습니다!</h2>
+    <div id="result" class="row mt-5" v-else>
+      <h2>검색 결과를 찾을 수 없습니다!</h2>
     </div>
   </div>
 </template>
@@ -81,5 +81,7 @@ mounted() {
 </script>
 
 <style>
-
+#result{
+  text-align: center;
+}
 </style>
