@@ -90,6 +90,22 @@ def update(request):
         except:
             print('error')
 
+@api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes([AllowAny])
+def moviedetail(request, movie_pk):
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    if request.method == 'GET':
+        serializer = MovieDetailSerializer(movie)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = MovieUpdateSerializer(data=request.data, instance=movie)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
+    else:
+        movie.delete()
+        return Response({'message': '영화가 삭제되었습니다.'})
+
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
