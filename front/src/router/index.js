@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Singup from '../views/Signup.vue'
 import Admin from '../views/Admin.vue'
+import User from '../views/UserPage.vue'
 
 Vue.use(VueRouter)
 
@@ -28,7 +29,11 @@ const routes = [
     name: 'admin',
     component: Admin
   },
-
+  {
+    path: '/user/:id',
+    name: 'user',
+    component: User
+  }
 ]
 
 const router = new VueRouter({

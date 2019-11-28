@@ -165,22 +165,10 @@ def userlist(request):
     return Response(serializer.data)
 
 
-# @api_view(['POST'])
-# def usercreate(request):
-#     serializer = UserSerializer(data=request.data)
-#     if serializer.is_valid(raise_exception=True):
-#         serializer.save()
-#     return Response(serializer.data)
-
-
-# @api_view(['PUT', 'DELETE'])
-# def userdetail(request, user_pk):
-#     user = get_object_or_404(get_user_model(), pk=user_pk)
-#     if request.method == 'PUT':
-#         serializer = UserSerializer(data=request.data, instance=user)
-#         if serializer.is_valid(raise_exception=True):
-#             serializer.save()
-#             return Response(serializer.data)
-#     else:
-#         user.delete()
-#         return Response({'message': '유저가 삭제되었습니다.'})
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def userdetail(request, user_pk):
+    user = get_object_or_404(get_user_model(), pk=user_pk)
+    serializer = UserDetailSerializer(user)
+    return Response(serializer.data)
+    

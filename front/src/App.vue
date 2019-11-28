@@ -4,7 +4,8 @@
     <div id="nav">
       <div v-if="isLogin">
         <router-link to="/">Home</router-link> |
-        <a @click="logout">Logout</a>
+        <a @click="logout">Logout</a> |
+        <router-link :to="{ name: 'user', params: { id: this.$store.state.userInfo.userpk }}">My Page</router-link>
       </div>
       <div v-else>
         <router-link to="/">Home</router-link> |

@@ -35,10 +35,10 @@ class GenreDetailSerializer(GenreSerializer):
 
 
 class UserDetailSerializer(serializers.ModelSerializer):
-    comment = CommentSerializer(many=True)
+    comments = CommentSerializer(many=True)
     class Meta:
         model = User
-        fields = ['id', 'followers', 'comment', ]
+        fields = ['id', 'username', 'email', 'followers', 'comments', ]
 
 
 class UserSerializer(serializers.ModelSerializer):
