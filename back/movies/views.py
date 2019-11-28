@@ -139,13 +139,16 @@ def genredetail(request, genre_pk):
         return Response(serializer.data)
 
 @api_view(['POST'])
+@permission_classes([AllowAny])
 def commentcreate(request, movie_pk):
     serializer = CommentSerializer(data=request.data)
+    user_id = request.data.get('user_id')
     if serializer.is_valid(raise_exception=True):
-        serializer.save(movie_id=movie_pk, user_id=request.user.pk)
+        serializer.save(movie_id=movie_pk, user_id=user_id)
     return Response(serializer.data)
 
 @api_view(['PUT', 'DELETE'])
+@permission_classes([AllowAny])
 def comment_update_and_delete(request, comment_pk):
     comment = get_object_or_404(Comment, pk=comment_pk)
     if request.method == 'PUT':
@@ -159,6 +162,7 @@ def comment_update_and_delete(request, comment_pk):
 
 
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def userlist(request):
     users = get_user_model().objects.all()
     serializer = UserSerializer(users, many=True)

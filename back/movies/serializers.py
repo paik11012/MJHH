@@ -11,15 +11,16 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 class MovieSerializer(serializers.ModelSerializer):
+    comments = CommentSerializer(many=True)
     class Meta:
         model = Movie
-        fields = ['id','title', 'poster_url', 'director', 'actor', 'description', 'grade', 'running_time', 'naver_score', 'open_date', 'audience', 'genre', 'liked_users', ]
+        fields = ['id','title', 'poster_url', 'director', 'actor', 'description', 'grade', 'running_time', 'naver_score', 'open_date', 'audience', 'genre', 'liked_users', 'comments' ]
 
 
 class MovieDetailSerializer(MovieSerializer):
-    comment = CommentSerializer(many=True)
+    comments = CommentSerializer(many=True)
     class Meta(MovieSerializer.Meta):
-        fields = MovieSerializer.Meta.fields + ['comment', ]
+        fields = MovieSerializer.Meta.fields + ['comments', ]
 
 
 class GenreSerializer(serializers.ModelSerializer):
