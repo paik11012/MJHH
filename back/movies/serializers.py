@@ -16,7 +16,7 @@ class MovieSerializer(serializers.ModelSerializer):
 class MovieUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
-        fields = ['id','title', 'poster_url', 'director', 'actor', 'description', 'grade', 'running_time', 'naver_score', 'open_date', 'audience', 'genre']
+        fields = ['id','title', 'poster_url', 'director', 'actor', 'description', 'grade', 'running_time', 'naver_score', 'open_date', 'audience', 'genre', 'liked_users']
 
 class GenreSerializer(serializers.ModelSerializer):
     class Meta:
@@ -30,9 +30,10 @@ class GenreDetailSerializer(GenreSerializer):
 
 class UserDetailSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(many=True)
+    liked_movies = MovieSerializer(many=True)
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'followers', 'comments', ]
+        fields = ['id', 'username', 'email', 'followers', 'comments', 'liked_movies', ]
         
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

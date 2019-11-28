@@ -61,7 +61,6 @@
 
 <script>
 import axios from "axios";
-import router from "@/router";
 export default {
   name: "MovieListItem",
   data() {
@@ -108,7 +107,7 @@ export default {
         .delete(`${SERVER_IP}/api/v1/moviedetail/${moviepk}/`)
         .then(response => {
           console.log(response);
-          router.push("/");
+          this.$router.go();
         })
         .catch(error => {
           console.error(error);
@@ -136,7 +135,7 @@ export default {
         .put(`${SERVER_IP}/api/v1/moviedetail/${moviepk}/`, data)
         .then(response => {
           console.log(response);
-          router.push('/');
+          this.$router.go();
         })
         .catch(error => {
           console.error(error);

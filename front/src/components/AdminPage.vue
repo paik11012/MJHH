@@ -7,6 +7,7 @@
       <option v-for="genre in genres" v-bind:key="genre.id" :value="genre.id">{{genre.name}}</option>
     </select>
     <br>
+    <!-- <router-link to="/adminuser">User List</router-link> -->
     <div>
       <b-button v-b-modal.modal-1 class="btn btn-success">추가</b-button>
       <b-modal hide-footer id="modal-1" title="Add Movie"
@@ -98,8 +99,7 @@ export default {
         "naver_score" : this.naver_score,
         "open_date": this.open_date,
         "audience": this.audience,
-        "genre": this.genre,
-        "liked_users": [1]
+        "genre": this.genre
       }
       axios.post(`${SERVER_IP}/api/v1/create/`, movie)
         .then(response=>{

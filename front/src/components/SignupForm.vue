@@ -9,6 +9,7 @@
       <input type="password" v-model="password1" name="userpassword" label="비밀번호를 입력하세요" />
       <p>Comfirm Password</p>
       <input type="password" v-model="password2" name="userpassword" label="비밀번호 확인" />
+      <hr>
       <p>Select Favorite Genres</p>
       <div id="like_genres_chk">
         <input type="checkbox" id="1" value="드라마" v-model="like_genres" />

@@ -120,7 +120,7 @@ def movielist(request):
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def create(request):
-    serializer = MovieSerializer(data=request.data)
+    serializer = MovieUpdateSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         serializer.save()
     return Response(serializer.data)
