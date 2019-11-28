@@ -27,15 +27,22 @@
         <br />
         <span>{{movie.description}}</span>
         <!-- comment 구현 -->
-        <br />
-        <br />
+        <br /><br /><br><br><br><br><br><br><br>
         <h4>Reviews</h4>
-        <span>평점 <input type="number" v-model="score" max=10 min=0 id="score"></span>
+        <span>평점: <input type="number" v-model="score" max=10 min=0 id="score"></span><br><br>
         <textarea  name="inputContent" v-model="content" cols="100" rows="3" id="content"></textarea>
-        <b-button @click="onSubmit" class="btn btn-dark" size="sm">작성</b-button>
-        <!-- <span>{{userInfo.username}}</span> -->
-        <!-- 쓴 커멘트 보여주기 -->
-        
+        <b-button @click="onSubmit(movie.id)" class="btn btn-dark" size="sm">작성</b-button>
+        <ul>
+          <div v-for="comment in movie.comments" :key="comment.id">
+            <li>
+              <span v-for="user in userlist" :key="user.id">
+                <p v-if="user.id === comment.user_id">{{ user.username }} <br/>
+                  {{ comment.score }} | {{ comment.content }}
+                </p>
+              </span>
+            </li>
+          </div>
+        </ul>
       </b-modal>
     </div>
     <h3 id="movie-title">{{ movie.title }}</h3>
@@ -44,7 +51,9 @@
 </template>
 
 <script>
+import axios from "axios";
 import { mapState } from "vuex";
+
 export default {
   name: "MovieListItem",
 
@@ -52,9 +61,8 @@ export default {
   data() {
     return {
       content:'',
-      contentList: [],
       score: 0,
-      scoreList: [],
+      userlist: [],
       show: false,
       variants: ["light", "dark"],
       headerBgVariant: "dark",
@@ -68,8 +76,7 @@ export default {
   computed: {
     ...mapState([
       "userInfo"
-    ])
- 
+    ]),
   },
   props: {
     movie: {
@@ -80,20 +87,39 @@ export default {
   components: {},
   methods: {
     onSelectMovie: function(movie) {
-      // console.log(movie.target.alt);
       this.selectMovie = movie.target.alt;
       this.show = true;
     },
-    onSubmit() {
-      // this.score = score.value
-      this.scoreList.push(this.score)
-      this.contentList.push(this.content)
-      // 여기 있는 정보를 sqlite에 저장해야 함
-      // 위 컴포넌트에서 가져오기(user, content, score)
-      // console.log(this.name)
+    onSubmit(moviepk) {
+      const SERVER_IP = process.env.VUE_APP_SERVER_IP
+      const commentObj = {
+        "content": this.content,
+        "score": parseInt(this.score),
+        "user_id": this.$store.state.userInfo.userpk
+      }
+      axios.post(`${SERVER_IP}/api/v1/commentcreate/${moviepk}/`, commentObj)
+        .then(response=>{
+          console.log(response)
+        })
+        .catch(error=>{
+          console.log(error)
+        })
       this.content=''
       this.score=0
     },
+    getuser: function(){
+      const SERVER_IP = process.env.VUE_APP_SERVER_IP
+      axios.get(`${SERVER_IP}/api/v1/userlist/`)
+        .then(response=>{
+          this.userlist = response.data
+        })
+        .catch(()=>{
+          alert('Fail')
+        })
+    }
+  },
+  mounted() {
+    this.getuser()
   }
 };
 </script>
