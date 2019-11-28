@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 from decouple import config
 from pprint import pprint
 from .models import Movie, Genre, Comment
-from .serializers import MovieSerializer, GenreSerializer, CommentSerializer, UserDetailSerializer, MovieDetailSerializer, GenreDetailSerializer, UserSerializer, UserDetailSerializer
+from .serializers import MovieSerializer, GenreSerializer, CommentSerializer, UserDetailSerializer, MovieDetailSerializer, GenreDetailSerializer, UserSerializer, UserDetailSerializer, MovieUpdateSerializer
 import time
 from django.contrib.auth import get_user_model
 
@@ -90,6 +90,22 @@ def update(request):
         except:
             print('error')
 
+@api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes([AllowAny])
+def moviedetail(request, movie_pk):
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    if request.method == 'GET':
+        serializer = MovieDetailSerializer(movie)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = MovieUpdateSerializer(data=request.data, instance=movie)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
+    else:
+        movie.delete()
+        return Response({'message': '영화가 삭제되었습니다.'})
+
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
@@ -99,21 +115,7 @@ def movielist(request):
     return Response(serializer.data)
 
 
-@api_view(['GET', 'PUT', 'DELETE'])
-@permission_classes([AllowAny])
-def moviedetail(request, movie_pk):
-    movie = get_object_or_404(Movie, pk=movie_pk)
-    if request.method == 'GET':
-        serializer = MovieDetailSerializer(movie)
-        return Response(serializer.data)
-    elif request.method == 'PUT':
-        serializer = MovieDetailSerializer(data=request.data, instance=movie)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            return Response(serializer.data)
-    else:
-        movie.delete()
-        return Response({'message': '영화가 삭제되었습니다.'})
+
     
 @api_view(['POST'])
 def create(request):
