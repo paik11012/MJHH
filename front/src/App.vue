@@ -1,5 +1,6 @@
 <template>
-  <div id="app">
+  <div id="app" class="shadow p-3 mb-2 bg-dark text-white" >
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif+KR|Stylish&display=swap" rel="stylesheet">
     <div id="nav">
       <!-- <div v-if="isLogIn"> -->
         <router-link to="/">Home</router-link> |
@@ -7,7 +8,8 @@
       <!-- </div> -->
       <!-- <div v-else> -->
         <router-link to="/login">Login</router-link> |
-        <router-link to="/signup">SignUp</router-link>
+        <router-link to="/signup">SignUp</router-link> |
+        <router-link to="/admin">Admin</router-link>
       <!-- </div> -->
     </div>
     <div class="container col-6">
@@ -19,6 +21,7 @@
 <script>
 // import router from '@/router'
 import { mapState, mapActions } from "vuex"
+
 export default {
   name: 'App',
   methods: {
@@ -30,21 +33,25 @@ export default {
 }
 </script>
 <style>
+
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Stylish', sans-serif;
+  /* font-family: 'Noto Serif KR', serif; */
+  min-height: 1000px;
+  /* font-family: 'Avenir', Helvetica, Arial, sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
 }
 #nav {
   padding: 30px;
 }
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: #f0f0f0;
 }
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: #8dd9ff;
 }
 </style>

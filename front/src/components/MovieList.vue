@@ -1,8 +1,8 @@
 <template>
   <div class="movie-list">
     <h1>영화 목록</h1>
-    <h2>장르 선택</h2>
-    <select class="form-control" v-model="genreid">
+    <h3>장르 선택</h3>
+    <select class="form-control" v-model="genreid" id="select-genre">
       <option value=0>전체</option>
       <option v-for="genre in genres" v-bind:key="genre.id" :value="genre.id">{{genre.name}}</option>
     </select>
@@ -13,7 +13,9 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import MovieListItem from "@/components/MovieListItem.vue";
+
 
 export default {
   name: "MovieList",
@@ -21,6 +23,7 @@ export default {
     MovieListItem
   },
   data() {
+
     return {
       genreid: 0
     };
@@ -36,6 +39,9 @@ export default {
     }
   },
   computed: {
+    ...mapState([
+      "userInfo"
+    ]),
     movieList: function() {
       if (this.genreid != 0) {
         const genre = this.genres.filter(
@@ -46,9 +52,14 @@ export default {
         return this.movies;
       }
     }
-  }
+  },
 };
 </script>
 
 <style>
+#select-genre {
+  background-color:#343A40 ;
+  color: white
+}
+
 </style>
