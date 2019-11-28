@@ -2,15 +2,16 @@
   <div id="app" class="shadow p-3 mb-2 bg-dark text-white" >
     <link href="https://fonts.googleapis.com/css?family=Noto+Serif+KR|Stylish&display=swap" rel="stylesheet">
     <div id="nav">
-      <!-- <div v-if="isLogIn"> -->
+      <div v-if="isLogin">
         <router-link to="/">Home</router-link> |
-        <a @click="logout">Logout</a> |
-      <!-- </div> -->
-      <!-- <div v-else> -->
+        <a @click="logout">Logout</a>
+      </div>
+      <div v-else>
+        <router-link to="/">Home</router-link> |
         <router-link to="/login">Login</router-link> |
         <router-link to="/signup">SignUp</router-link> |
         <router-link to="/admin">Admin</router-link>
-      <!-- </div> -->
+      </div>
     </div>
     <div class="container col-6">
       <router-view/>
@@ -21,6 +22,7 @@
 <script>
 // import router from '@/router'
 import { mapState, mapActions } from "vuex"
+import jwtDecode from 'jwt-decode'
 
 export default {
   name: 'App',
@@ -28,8 +30,20 @@ export default {
     ...mapActions(["logout"])
   },
   computed: {
-    ...mapState(["isLogin"])
+    ...mapState(["isLogin", "userInfo"])
   },
+  mounted() {
+    if (localStorage.getItem("access_token") !== "null"){
+      const token = localStorage.getItem("access_token")
+      const user = jwtDecode(token)
+      const userInfo = {
+        userpk: user.user_id,
+        token: token,
+        username: user.username
+      }
+      this.$store.commit("loginSuccess", userInfo)
+    }
+  }
 }
 </script>
 <style>

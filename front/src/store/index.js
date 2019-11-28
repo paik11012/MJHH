@@ -35,11 +35,13 @@ export default new Vuex.Store({
       axios.post(SERVER_IP + "/rest-auth/login/", loginObj)
         .then(res => {
           let token = res.data.token;
+          const userpk = res.data.user.pk
           localStorage.setItem("access_token", token);
           // this.commit('loginSuccess', token)
           router.push({name: "home"});
           // userinfo 객체 새롭게 만들어서 그곳에 token, loginobject의 username을 저장한다. object 만들기
           const userInfo = {
+            userpk: userpk,
             token: token,
             username: loginObj.username
           }
