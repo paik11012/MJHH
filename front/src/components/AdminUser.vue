@@ -1,15 +1,45 @@
 <template>
   <div>
-    <h1>Hi</h1>
+    <h3>UserList</h3>
+    <div v-for="user in userlist" :key="user.id">
+      <button class="btn" @click="userdetail(user.id)">{{ user.username }}</button>
+      <br>
+    </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+import router from "@/router";
+
 export default {
-name: "AdminUser",
-}
+  name: "AdminUser",
+  data() {
+    return {
+      userlist: []
+    };
+  },
+  methods: {
+    getuser: function() {
+      const SERVER_IP = process.env.VUE_APP_SERVER_IP;
+      axios
+        .get(`${SERVER_IP}/api/v1/userlist/`)
+        .then(response => {
+          this.userlist = response.data;
+        })
+        .catch(() => {
+          alert("Fail");
+        });
+    },
+    userdetail: function(userpk) {
+      router.push(`/user/${userpk}`)
+    }
+  },
+  mounted() {
+    this.getuser();
+  }
+};
 </script>
 
 <style>
-
 </style>

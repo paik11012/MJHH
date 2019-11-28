@@ -7,7 +7,7 @@
       <option v-for="genre in genres" v-bind:key="genre.id" :value="genre.id">{{genre.name}}</option>
     </select>
     <br>
-    <!-- <router-link to="/adminuser">User List</router-link> -->
+    <router-link to="/adminuser">User List</router-link>
     <div>
       <b-button v-b-modal.modal-1 class="btn btn-success">추가</b-button>
       <b-modal hide-footer id="modal-1" title="Add Movie"
@@ -35,6 +35,8 @@
     <div class="row mt-5">
       <MovieListItem v-for="movie in movieList" :movie="movie" :key="movie.id" />
     </div>
+    <hr>
+    <AdminUser />
   </div>
 </template>
 
@@ -44,12 +46,14 @@ import { mapState } from "vuex";
 import axios from "axios";
 import router from "@/router";
 import MovieListItem from "@/components/MovieListItemAdmin.vue";
+import AdminUser from "@/components/AdminUser.vue"
 
 
 export default {
   name: "MovieList",
   components: {
-    MovieListItem
+    MovieListItem,
+    AdminUser
   },
   data() {
     return {
