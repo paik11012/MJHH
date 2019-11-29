@@ -24,7 +24,7 @@ export default {
       const SERVER_IP = process.env.VUE_APP_SERVER_IP
       axios.get(`${SERVER_IP}/api/v1/movielist/`)
         .then(response=>{
-          console.log(response)
+          // console.log(response)
           this.movies = response.data
         })
         .catch(error=>{
@@ -35,7 +35,7 @@ export default {
       const SERVER_IP = process.env.VUE_APP_SERVER_IP
       axios.get(`${SERVER_IP}/api/v1/genrelist/`)
         .then(response=>{
-          console.log(response)
+          // console.log(response)
           this.genres = response.data
         })
         .catch(error=>{

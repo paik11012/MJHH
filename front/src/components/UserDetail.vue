@@ -37,6 +37,7 @@
     <h3>Followers</h3>
     <div v-for="follower in followers" :key="follower.id">{{ followr }}</div>
     <hr />
+    <div v-if="user === this.$store.state.userInfo.userpk">
     <div v-if="choose_genres">
       <p>Select Favorite Genres</p>
       <div id="liked_genres_chk">
@@ -77,7 +78,7 @@
         <label for="무협">무협</label>
         <br />
         <span>장르: {{ liked_genres }}</span>
-          <button @click="checkgenre" class="btn">Submit</button>
+        <button @click="checkgenre" class="btn">Submit</button>
       </div>
     </div>
     <div v-else>
@@ -85,17 +86,17 @@
       <button @click="checkgenre" class="btn">Click!</button>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
-import jwtDecode from "jwt-decode";
 import axios from "axios";
 
 export default {
   name: "UserDetail",
   data() {
     return {
-      user: jwtDecode(localStorage.getItem("access_token")),
+      user: this.$route.params.id,
       username: "",
       useremail: "",
       comments: [],
@@ -109,22 +110,23 @@ export default {
     getuserinfo: function() {
       const SERVER_IP = process.env.VUE_APP_SERVER_IP;
       axios
-        .get(`${SERVER_IP}/api/v1/userdetail/${this.user.user_id}`)
+        .get(`${SERVER_IP}/api/v1/userdetail/${this.user}`)
         .then(response => {
+          console.log(response);
           this.username = response.data.username;
           this.useremail = response.data.email;
           this.comments = response.data.comments;
           this.followers = response.data.followers;
           this.liked_movies = response.data.liked_movies;
-          this.liked_genres = response.data.liked_genres
+          this.liked_genres = response.data.liked_genres;
         });
     },
     checkgenre: function() {
       if (this.choose_genres === false) {
         this.choose_genres = true;
       } else {
-        this.user.liked_genres = this.liked_genres
-        this.choose_genres = false
+        this.user.liked_genres = this.liked_genres;
+        this.choose_genres = false;
       }
     }
   },
