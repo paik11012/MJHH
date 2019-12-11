@@ -14,33 +14,31 @@
     <h3>Email: {{ useremail }}</h3>
     <hr />
     <h3>Like Movies</h3>
-
     <b-carousel
       id="carousel-fade"
       style="text-shadow: 0px 0px 2px #000"
       fade
       indicators
-      img-width="1024"
-      img-height="480"
     >
       <div v-for="movie in liked_movies" :key="movie.id">
-        <b-carousel-slide :caption="movie.title" :img-src="movie.poster_url" id="like_movie" height:150>
+        <b-carousel-slide :caption="movie.title" :img-src="movie.poster_url" id="like_movie"> 
         </b-carousel-slide>
       </div>
     </b-carousel>
+
     <hr />
     <h3>Comments</h3>
     <div v-for="comment in comments" :key="comment.id">
-      {{ comment.id }} {{ comment.content }}
+      {{ comment.content }}
       <br />
     </div>
-    <hr />
+    <!-- <hr />
     <h3>Followers</h3>
-    <div v-for="follower in followers" :key="follower.id">{{ followr }}</div>
+    <div v-for="follower in followers" :key="follower.id">{{ follower }}</div> -->
     <hr />
     <div v-if="user === this.$store.state.userInfo.userpk">
       <div v-if="choose_genres">
-        <p>Select Favorite Genres</p>
+        <h3>Select Favorite Genres</h3>
         <div id="liked_genres_chk">
           <input type="checkbox" id="1" value="드라마" v-model="liked_genres" />
           <label for="드라마">멜로/로맨스</label>
@@ -79,12 +77,12 @@
           <label for="무협">무협</label>
           <br />
           <span>장르: {{ liked_genres }}</span>
-          <button @click="checkgenre" class="btn">Submit</button>
+          <button @click="checkgenre" class="btn" id="sub">Submit</button>
         </div>
       </div>
       <div v-else>
-        <h4>Do you want select your favorite genres?</h4>
-        <button @click="checkgenre" class="btn">Click!</button>
+        <h4>Favorite genres?</h4>
+        <button @click="checkgenre" class="btn" id="fg">Click!</button>
       </div>
     </div>
   </div>
@@ -138,4 +136,15 @@ export default {
 </script>
 
 <style>
+#like_movie{
+height: 600px;
+width: 300px;
+margin-left:300px
+}
+#fg{
+  color:white
+}
+#sub{
+  color:white
+}
 </style>

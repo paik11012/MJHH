@@ -7,7 +7,6 @@
       <option v-for="genre in genres" v-bind:key="genre.id" :value="genre.id">{{genre.name}}</option>
     </select>
     <br>
-    <router-link to="/adminuser">User List</router-link>
     <div>
       <b-button v-b-modal.modal-1 class="btn btn-success">추가</b-button>
       <b-modal hide-footer id="modal-1" title="Add Movie"

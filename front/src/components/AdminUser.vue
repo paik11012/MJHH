@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h3>UserList</h3>
+    <h3>User List</h3>
     <div v-for="user in userlist" :key="user.id">
-      <button class="btn" @click="userdetail(user.id)" id="username" >{{ user.username }} </button>
+      <button class="btn btn-lg" @click="userdetail(user.id)" id="username" >{{ user.username }} </button>
       <br>
     </div>
   </div>

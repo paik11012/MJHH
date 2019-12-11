@@ -10,7 +10,6 @@
     <div class="row mt-5">
       <MovieListItem v-for="movie in movieList" :movie="movie" :key="movie.id" />
     </div>
-    <h3>장르 추천</h3>
   </div>
   
 </template>
