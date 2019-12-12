@@ -37,6 +37,18 @@
     <div class="container col-6">
       <router-view />
     </div>
+    <!-- 끝에 -->
+    <div>
+</div>
+<div class="jumbotron" id="jumbo">
+  <h1 class="display-5" >Movie Genre Sorting Site</h1>
+  <p class="lead">김현화 & 백민주</p>
+  <p>For more information visit website</p>
+  <p class="lead">
+    <a class="btn btn-dark" href="https://github.com/paik11012/MJHH" role="button" target="_blank">Learn more</a>
+  </p>
+</div>
+
   </div>
 </template>
 
@@ -101,5 +113,9 @@ export default {
 }
 #nav a.router-link-exact-active {
   color: #8dd9ff;
+}
+#jumbo{
+  color:black;
+  background-color: darkgrey;
 }
 </style>

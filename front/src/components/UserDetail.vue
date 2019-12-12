@@ -13,7 +13,7 @@
     <br />
     <h3>Email: {{ useremail }}</h3>
     <hr />
-    <h3>Like Movies</h3>
+    <h3>Liked Movies</h3>
     <b-carousel
       id="carousel-fade"
       style="text-shadow: 0px 0px 2px #000"
@@ -32,12 +32,16 @@
       {{ comment.content }}
       <br />
     </div>
+    <br>
+    
+    
+    <!-- <h3>Liked Genres</h3>
+    <p>{{ user.liked_genres }}</p> -->
     <!-- <hr />
     <h3>Followers</h3>
     <div v-for="follower in followers" :key="follower.id">{{ follower }}</div> -->
-    <hr />
-    <div v-if="user === this.$store.state.userInfo.userpk">
-      <div v-if="choose_genres">
+    <!-- <div v-if="user === this.$store.state.userInfo.userpk"> -->
+      <!-- <div>
         <h3>Select Favorite Genres</h3>
         <div id="liked_genres_chk">
           <input type="checkbox" id="1" value="드라마" v-model="liked_genres" />
@@ -79,12 +83,7 @@
           <span>장르: {{ liked_genres }}</span>
           <button @click="checkgenre" class="btn" id="sub">Submit</button>
         </div>
-      </div>
-      <div v-else>
-        <h4>Favorite genres?</h4>
-        <button @click="checkgenre" class="btn" id="fg">Click!</button>
-      </div>
-    </div>
+  </div> -->
   </div>
 </template>
 
@@ -93,6 +92,7 @@ import axios from "axios";
 
 export default {
   name: "UserDetail",
+  el: '#liked_genres_chk',
   data() {
     return {
       user: this.$route.params.id,
@@ -120,14 +120,14 @@ export default {
           this.liked_genres = response.data.liked_genres;
         });
     },
-    checkgenre: function() {
-      if (this.choose_genres === false) {
-        this.choose_genres = true;
-      } else {
-        this.user.liked_genres = this.liked_genres;
-        this.choose_genres = false;
-      }
-    }
+    // checkgenre: function() {
+    //   if (this.choose_genres === false) {
+    //     this.choose_genres = true;
+    //   } else {
+    //     this.user.liked_genres = this.liked_genres;
+    //     this.choose_genres = false;
+    //   }
+    // }
   },
   mounted() {
     this.getuserinfo();

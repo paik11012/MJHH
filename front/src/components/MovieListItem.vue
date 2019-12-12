@@ -28,7 +28,7 @@
         :footer-bg-variant="footerBgVariant"
         :footer-text-variant="footerTextVariant"
       >
-        <img :src="movie.poster_url" alt="movie poster" id="movie-detail-image" />
+        <img :src="movie.poster_url" alt="movie poster" id="movie-detail-image"/>
         <h5>감독 {{movie.director}}</h5>
         <h5>배우 {{movie.actor}}</h5>
         <h5>{{movie.grade}}</h5>
@@ -40,16 +40,27 @@
         <span>{{movie.description}}</span>
         <!-- comment 구현 -->
         <hr />
-        <!-- <br /><br><br><br><br><br><br><br><br><br> -->
+        <!-- 별점 표현하기 -->
         <h4>Reviews</h4>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
+
         <span>
           평점:
-          <input type="number" v-model="score" max="10" min="0" id="score" />
+          <!-- <input type="number" v-model="score" max="5" min="0" id="score" /> -->
+          <select v-model="score" id="score">
+            <option>5</option>
+            <option>4</option>
+            <option>3</option>
+            <option>2</option>
+            <option>1</option>
+            <option>0</option>
+          </select>
         </span>
         <br />
         <br />
-        <textarea name="inputContent" v-model="content" cols="100" rows="3" id="content"></textarea>
-        <b-button @click="onSubmit(movie.id)" class="btn btn-dark" size="sm">작성</b-button>
+        <textarea name="inputContent" v-model="content" cols="80" rows="3" id="content"></textarea>
+        <!-- comment  작성하기 -->
+        <b-button @click="onSubmit(movie.id)" class="btn btn-dark" size="sm">평점리뷰 작성</b-button>
         <CommentList :comments="movie.comments" />
         <router-view :key="$route.fullPath" />
       </b-modal>
@@ -85,6 +96,7 @@ export default {
       liked_users: this.movie.liked_users,
       content: "",
       score: 0,
+      // modal관련
       show: false,
       variants: ["light", "dark"],
       headerBgVariant: "dark",
@@ -109,7 +121,7 @@ export default {
       this.selectMovie = movie.target.alt;
       this.show = true;
     },
-    onSubmit(moviepk) {
+    onSubmit(moviepk) { // comment의 작성 버튼을 눌렀을 때
       const SERVER_IP = process.env.VUE_APP_SERVER_IP;
       const commentObj = {
         content: this.content,
@@ -119,7 +131,10 @@ export default {
       axios
         .post(`${SERVER_IP}/api/v1/commentcreate/${moviepk}/`, commentObj)
         .then(() => {
-          // this.$router.go();
+          
+          this.$router.go();
+          // 새로 넣은 두 줄
+
         })
         .catch(error => {
           console.log(error);

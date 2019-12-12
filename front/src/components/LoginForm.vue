@@ -8,6 +8,7 @@
         class="form-control"
         placeholder="아이디를 입력해주세요"
         v-model="username"
+        style="color:black"
       />
       <div class="form-group">
         <label for="password">Password </label>
@@ -43,4 +44,7 @@ export default {
 </script>
 
 <style>
+#username{
+  color: black
+}
 </style>
