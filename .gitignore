@@ -7,7 +7,6 @@
 *.pyc
 __pycache__/
 local_settings.py
-db.sqlite3-journal
 media
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
@@ -182,8 +181,7 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
-.env.test
+
 
 # parcel-bundler cache (https://parceljs.org/)
 
