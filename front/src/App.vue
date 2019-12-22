@@ -41,11 +41,11 @@
     <div>
 </div>
 <div class="jumbotron" id="jumbo">
-  <h1 class="display-5" >Movie Genre Sorting Site</h1>
+  <h2 class="display-5" >2018-2019 Popular Movies</h2>
   <p class="lead">김현화 & 백민주</p>
   <p>For more information visit website</p>
   <p class="lead">
-    <a class="btn btn-dark" href="https://github.com/paik11012/MJHH" role="button" target="_blank">Learn more</a>
+    <a class="btn btn-dark" href="https://github.com/paik11012/MJHH" role="button" target="_blank">Github</a>
   </p>
 </div>
 
@@ -117,5 +117,6 @@ export default {
 #jumbo{
   color:black;
   background-color: darkgrey;
+  height: 280px;
 }
 </style>

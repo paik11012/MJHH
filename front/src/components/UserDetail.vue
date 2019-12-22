@@ -1,6 +1,7 @@
 <template>
   <div class="user">
-    <h2>My Info</h2>
+    <br />
+    <h3>My Info</h3>
     <br />
     <img
       width="300px"
@@ -9,9 +10,9 @@
     />
     <br />
     <br />
-    <h3>ID: {{ username }}</h3>
+    <h4>ID: {{ username }}</h4>
     <br />
-    <h3>Email: {{ useremail }}</h3>
+    <h4>Email: {{ useremail }}</h4>
     <hr />
     <h3>Liked Movies</h3>
     <b-carousel
@@ -136,6 +137,10 @@ export default {
 </script>
 
 <style>
+h3{
+  color:DarkSalmon
+}
+
 #like_movie{
 height: 600px;
 width: 300px;
