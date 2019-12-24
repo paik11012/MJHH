@@ -6,7 +6,7 @@
       integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
       crossorigin="anonymous"
     />
-    <button class="btn btn-dark" type="submit">
+    <button class="btn btn-sm btn-dark" type="submit">
       <img
         @click="onSelectMovie"
         class="movie--poster my-3"
@@ -41,7 +41,7 @@
         <!-- comment 구현 -->
         <hr />
         <!-- 별점 표현하기 -->
-        <h4>Reviews</h4>
+        <h4 id="reviews">Reviews</h4>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
 
         <span>
@@ -58,9 +58,10 @@
         </span>
         <br />
         <br />
-        <textarea name="inputContent" v-model="content" cols="80" rows="3" id="content"></textarea>
+        <textarea name="inputContent" v-model="content" rows="3" id="content"
+        style="border: 2px solid gray width:100%"></textarea>
         <!-- comment  작성하기 -->
-        <b-button @click="onSubmit(movie.id)" class="btn btn-dark" size="sm">평점리뷰 작성</b-button>
+        <b-button @click="onSubmit(movie.id)" class="btn btn-dark" size="sm">작성</b-button>
         <CommentList :comments="movie.comments" />
         <router-view :key="$route.fullPath" />
       </b-modal>
@@ -199,8 +200,11 @@ export default {
 </script>
 
 <style>
-#movie-modal {
-  font-family: "Stylish", sans-serif;
+#movie-detail-image{
+  margin: 15px
+}
+#reviews{
+  font-family: 'Jua', sans-serif;
 }
 #score {
   background-color: #343a40;
@@ -218,8 +222,30 @@ export default {
   text-align: center;
 }
 #movie-detail-image {
-  width: 400px;
+  width: 300px;
   float: left;
   margin-right: 20px;
 }
+/* 이미지에 마우스 올리면 확대 */
+.btn img {
+    -webkit-transform:scale(1);
+    -moz-transform:scale(1);
+    -ms-transform:scale(1); 
+    -o-transform:scale(1);  
+    transform:scale(1);
+    -webkit-transition:.3s;
+    -moz-transition:.3s;
+    -ms-transition:.3s;
+    -o-transition:.3s;
+    transition:.3s;
+}
+.btn:hover img {
+    -webkit-transform:scale(1.2);
+    -moz-transform:scale(1.2);
+    -ms-transform:scale(1.2);   
+    -o-transform:scale(1.2);
+    transform:scale(1.2);
+}
+
+
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="login-div">
+  <div class="login-div" id="loginnn">
     <div class="form-group">
       <label for="username">ID </label>
       <input
@@ -46,5 +46,8 @@ export default {
 <style>
 #username{
   color: black
+}
+#loginnn{
+  font-family: "Jua", sans-serif;
 }
 </style>

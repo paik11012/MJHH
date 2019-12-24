@@ -150,7 +150,7 @@ export default {
   color:black
 }
 #movie-modal {
-  font-family: "Stylish", sans-serif;
+  font-family: 'Nanum Gothic', monospace;
 }
 #score {
   background-color: #343a40;

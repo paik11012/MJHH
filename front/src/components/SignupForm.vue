@@ -1,5 +1,5 @@
 <template>
-  <div class="formContainer">
+  <div class="formContainer" id="loginn">
     <form class="login-box">
       <br>
       <h2>Sign Up</h2>
@@ -97,5 +97,7 @@ export default {
 };
 </script>
 <style>
-
+#loginn{
+  font-family: "Jua", sans-serif;
+}
 </style>

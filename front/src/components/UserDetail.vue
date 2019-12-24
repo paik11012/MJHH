@@ -1,7 +1,7 @@
 <template>
-  <div class="user">
+  <div class="user" id="all">
     <br />
-    <h3>My Info</h3>
+    <h3 id="one">My Info</h3>
     <br />
     <img
       width="300px"
@@ -15,17 +15,33 @@
     <h4>Email: {{ useremail }}</h4>
     <hr />
     <h3>Liked Movies</h3>
-    <b-carousel
+    <!-- <b-carousel
       id="carousel-fade"
       style="text-shadow: 0px 0px 2px #000"
       fade
       indicators
+      img-width="1024"
+     img-height="480"
     >
       <div v-for="movie in liked_movies" :key="movie.id">
         <b-carousel-slide :caption="movie.title" :img-src="movie.poster_url" id="like_movie"> 
         </b-carousel-slide>
       </div>
-    </b-carousel>
+    </b-carousel>-->
+    <div>
+      <b-carousel
+        id="carousel-fade"
+        style="text-shadow: 0px 0px 2px #000"
+        fade
+        indicators
+      >
+      <div v-for="movie in liked_movies" :key="movie.id">
+        <b-carousel-slide :img-src="movie.poster_url" id="like_movie"> 
+          <!-- :caption="movie.title"  -->
+        </b-carousel-slide>
+      </div>
+      </b-carousel>
+    </div>
 
     <hr />
     <h3>Comments</h3>
@@ -33,16 +49,15 @@
       {{ comment.content }}
       <br />
     </div>
-    <br>
-    
-    
+    <br />
+
     <!-- <h3>Liked Genres</h3>
-    <p>{{ user.liked_genres }}</p> -->
+    <p>{{ user.liked_genres }}</p>-->
     <!-- <hr />
     <h3>Followers</h3>
-    <div v-for="follower in followers" :key="follower.id">{{ follower }}</div> -->
+    <div v-for="follower in followers" :key="follower.id">{{ follower }}</div>-->
     <!-- <div v-if="user === this.$store.state.userInfo.userpk"> -->
-      <!-- <div>
+    <!-- <div>
         <h3>Select Favorite Genres</h3>
         <div id="liked_genres_chk">
           <input type="checkbox" id="1" value="드라마" v-model="liked_genres" />
@@ -84,7 +99,7 @@
           <span>장르: {{ liked_genres }}</span>
           <button @click="checkgenre" class="btn" id="sub">Submit</button>
         </div>
-  </div> -->
+    </div>-->
   </div>
 </template>
 
@@ -93,7 +108,7 @@ import axios from "axios";
 
 export default {
   name: "UserDetail",
-  el: '#liked_genres_chk',
+  el: "#liked_genres_chk",
   data() {
     return {
       user: this.$route.params.id,
@@ -120,7 +135,7 @@ export default {
           this.liked_movies = response.data.liked_movies;
           this.liked_genres = response.data.liked_genres;
         });
-    },
+    }
     // checkgenre: function() {
     //   if (this.choose_genres === false) {
     //     this.choose_genres = true;
@@ -137,19 +152,21 @@ export default {
 </script>
 
 <style>
-h3{
-  color:DarkSalmon
+#all {
+  font-family: "Jua", sans-serif;
 }
+.img{
+  width: auto; height: 100%; }
 
-#like_movie{
-height: 600px;
-width: 300px;
-margin-left:300px
+#like_movie {
+  max-height: 35%;
+  max-width: 35%;
+  margin-left: 33%  
 }
-#fg{
-  color:white
+#fg {
+  color: white;
 }
-#sub{
-  color:white
+#sub {
+  color: white;
 }
 </style>
