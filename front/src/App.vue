@@ -118,6 +118,7 @@ export default {
   background-color: darkgrey;
   height: 280px;
   font-family: 'Jua', sans-serif;
+  margin-bottom: 2px
 }
 /* 이미지 크기 고정하기 */
 img {

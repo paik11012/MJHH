@@ -24,17 +24,24 @@
       >
         <img :src="movie.poster_url" alt="movie poster" id="movie-detail-image" />
         <button @click="onModify(movie.id)" class="btn btn-danger" type="submit" id="modi">수정</button>
-        <hr>
-        <h5>제목</h5><input type="text" v-model="title" id="title">
-        <h5>포스터url</h5><input type="text" v-model="poster_url" id="poster_url">
+        <hr />
+        <h5>제목</h5>
+        <input type="text" v-model="title" id="title" />
+        <h5>포스터url</h5>
+        <input type="text" v-model="poster_url" id="poster_url" />
         <div>
-          <h5>감독</h5><input type="text" v-model="director" id="director">
-          <h5>배우</h5><input type="text" v-model="actor" id="actor">
-          <h5>개봉일</h5><input type="text" v-model="open_date" id="open_date">
-          <h5>상영시간</h5><input type="text" v-model="running_time" id="running_time">
-          <h5>장르</h5><input type="text" v-model="genre" id="genre">
-          <hr>
-          <textarea name="" id="" cols="40" v-model="movie.description" rows="12"></textarea>
+          <h5>감독</h5>
+          <input type="text" v-model="director" id="director" />
+          <h5>배우</h5>
+          <input type="text" v-model="actor" id="actor" />
+          <h5>개봉일</h5>
+          <input type="text" v-model="open_date" id="open_date" />
+          <h5>상영시간</h5>
+          <input type="text" v-model="running_time" id="running_time" />
+          <h5>장르</h5>
+          <input type="text" v-model="genre" id="genre" />
+          <hr />
+          <textarea name id cols="40" v-model="movie.description" rows="12"></textarea>
         </div>
         <br />
 
@@ -69,11 +76,11 @@ export default {
       director: this.movie.director,
       poster_url: this.movie.poster_url,
       actor: this.movie.actor,
-      running_time:this.movie.running_time,
+      running_time: this.movie.running_time,
       grade: this.movie.grade,
       description: this.movie.description,
-      open_date:this.movie.open_date,
-      genre:this.movie.genre,
+      open_date: this.movie.open_date,
+      genre: this.movie.genre,
 
       content: "",
       contentList: [],
@@ -117,20 +124,20 @@ export default {
     onModify(moviepk) {
       const SERVER_IP = process.env.VUE_APP_SERVER_IP;
       const data = {
-        "title": this.title,
-        "poster_url": this.poster_url,
-        "director": this.director,
-        "actor": this.actor,
-        "description": this.description,
-        "grade": this.grade,
-        "running_time": this.running_time,
-        "naver_score" : this.movie.naver_score,
-        "open_date": this.open_date,
-        "audience": this.movie.audience,
-        "genre": this.genre
-      }
-      console.log(moviepk)
-      console.log(data)
+        title: this.title,
+        poster_url: this.poster_url,
+        director: this.director,
+        actor: this.actor,
+        description: this.description,
+        grade: this.grade,
+        running_time: this.running_time,
+        naver_score: this.movie.naver_score,
+        open_date: this.open_date,
+        audience: this.movie.audience,
+        genre: this.genre
+      };
+      console.log(moviepk);
+      console.log(data);
       axios
         .put(`${SERVER_IP}/api/v1/moviedetail/${moviepk}/`, data)
         .then(response => {
@@ -139,18 +146,18 @@ export default {
         })
         .catch(error => {
           console.error(error);
-      });
+        });
     }
   }
 };
 </script>
 
 <style>
-#modi{
-  color:black
+#modi {
+  color: black;
 }
 #movie-modal {
-  font-family: 'Nanum Gothic', monospace;
+  font-family: "Nanum Gothic", monospace;
 }
 #score {
   background-color: #343a40;
@@ -168,7 +175,7 @@ export default {
   text-align: center;
 }
 #movie-detail-image {
-  width: 400px;
+  width: 45%;
   float: left;
   margin-right: 20px;
 }

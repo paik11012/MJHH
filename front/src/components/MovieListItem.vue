@@ -28,7 +28,7 @@
         :footer-bg-variant="footerBgVariant"
         :footer-text-variant="footerTextVariant"
       >
-        <img :src="movie.poster_url" alt="movie poster" id="movie-detail-image"/>
+        <img :src="movie.poster_url" alt="movie poster" id="movie-detail-image" />
         <h5>감독 {{movie.director}}</h5>
         <h5>배우 {{movie.actor}}</h5>
         <h5>{{movie.grade}}</h5>
@@ -41,11 +41,10 @@
         <!-- comment 구현 -->
         <hr />
         <!-- 별점 표현하기 -->
-        <h4 id="reviews">Reviews</h4>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
-
-        <span>
-          평점:
+        <div v-if="this.$store.state.userInfo !== null">
+          <h4 id="reviews">Reviews</h4>
+          <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+          <span>평점</span>
           <!-- <input type="number" v-model="score" max="5" min="0" id="score" /> -->
           <select v-model="score" id="score">
             <option>5</option>
@@ -53,17 +52,23 @@
             <option>3</option>
             <option>2</option>
             <option>1</option>
-            <option>0</option>
           </select>
-        </span>
-        <br />
-        <br />
-        <textarea name="inputContent" v-model="content" rows="3" id="content"
-        style="border: 2px solid gray width:100%"></textarea>
-        <!-- comment  작성하기 -->
-        <b-button @click="onSubmit(movie.id)" class="btn btn-dark" size="sm">작성</b-button>
-        <CommentList :comments="movie.comments" />
-        <router-view :key="$route.fullPath" />
+
+          <br />
+          <br />
+
+          <div class="input-group">
+            <textarea class="form-control" aria-label="With textarea"
+            name="inputContent"
+            v-model="content"
+            id="content"></textarea>
+          </div>
+          
+          <!-- comment  작성하기 -->
+          <b-button @click="onSubmit(movie.id)" class="btn btn-dark" id="wb">작성</b-button>
+          <CommentList :comments="movie.comments" />
+          <router-view :key="$route.fullPath" />
+        </div>
       </b-modal>
     </div>
     <h3 id="movie-title">
@@ -122,7 +127,8 @@ export default {
       this.selectMovie = movie.target.alt;
       this.show = true;
     },
-    onSubmit(moviepk) { // comment의 작성 버튼을 눌렀을 때
+    onSubmit(moviepk) {
+      // comment의 작성 버튼을 눌렀을 때
       const SERVER_IP = process.env.VUE_APP_SERVER_IP;
       const commentObj = {
         content: this.content,
@@ -132,10 +138,8 @@ export default {
       axios
         .post(`${SERVER_IP}/api/v1/commentcreate/${moviepk}/`, commentObj)
         .then(() => {
-          
           this.$router.go();
           // 새로 넣은 두 줄
-
         })
         .catch(error => {
           console.log(error);
@@ -144,67 +148,66 @@ export default {
       this.score = 0;
     },
     addlikes: function(moviepk) {
-      this.liked_users.push(this.$store.state.userInfo.userpk)
+      this.liked_users.push(this.$store.state.userInfo.userpk);
       const SERVER_IP = process.env.VUE_APP_SERVER_IP;
       const data = {
-        "title": this.movie.title,
-        "poster_url": this.movie.poster_url,
-        "director": this.movie.director,
-        "actor": this.movie.actor,
-        "description": this.movie.description,
-        "grade": this.movie.grade,
-        "running_time": this.movie.running_time,
-        "naver_score" : this.movie.naver_score,
-        "open_date": this.movie.open_date,
-        "audience": this.movie.audience,
-        "genre": this.movie.genre,
-        "liked_users": this.liked_users
-      }
+        title: this.movie.title,
+        poster_url: this.movie.poster_url,
+        director: this.movie.director,
+        actor: this.movie.actor,
+        description: this.movie.description,
+        grade: this.movie.grade,
+        running_time: this.movie.running_time,
+        naver_score: this.movie.naver_score,
+        open_date: this.movie.open_date,
+        audience: this.movie.audience,
+        genre: this.movie.genre,
+        liked_users: this.liked_users
+      };
       axios
         .put(`${SERVER_IP}/api/v1/moviedetail/${moviepk}/`, data)
-        .then(() => {
-        })
+        .then(() => {})
         .catch(error => {
           console.error(error);
-      });
+        });
     },
     removelikes: function(moviepk) {
       this.liked_users.pop(this.$store.state.userInfo.userpk);
-      console.log(this.liked_users)
+      console.log(this.liked_users);
       const SERVER_IP = process.env.VUE_APP_SERVER_IP;
       const data = {
-        "title": this.movie.title,
-        "poster_url": this.movie.poster_url,
-        "director": this.movie.director,
-        "actor": this.movie.actor,
-        "description": this.movie.description,
-        "grade": this.movie.grade,
-        "running_time": this.movie.running_time,
-        "naver_score" : this.movie.naver_score,
-        "open_date": this.movie.open_date,
-        "audience": this.movie.audience,
-        "genre": this.movie.genre,
-        "liked_users": this.liked_users
-      }
+        title: this.movie.title,
+        poster_url: this.movie.poster_url,
+        director: this.movie.director,
+        actor: this.movie.actor,
+        description: this.movie.description,
+        grade: this.movie.grade,
+        running_time: this.movie.running_time,
+        naver_score: this.movie.naver_score,
+        open_date: this.movie.open_date,
+        audience: this.movie.audience,
+        genre: this.movie.genre,
+        liked_users: this.liked_users
+      };
       axios
         .put(`${SERVER_IP}/api/v1/moviedetail/${moviepk}/`, data)
         .then(response => {
-          console.log(response)
+          console.log(response);
         })
         .catch(error => {
           console.error(error);
-      });
+        });
     }
   }
 };
 </script>
 
 <style>
-#movie-detail-image{
-  margin: 15px
+#movie-detail-image {
+  margin: 15px;
 }
-#reviews{
-  font-family: 'Jua', sans-serif;
+#reviews {
+  font-family: "Jua", sans-serif;
 }
 #score {
   background-color: #343a40;
@@ -228,24 +231,22 @@ export default {
 }
 /* 이미지에 마우스 올리면 확대 */
 .btn img {
-    -webkit-transform:scale(1);
-    -moz-transform:scale(1);
-    -ms-transform:scale(1); 
-    -o-transform:scale(1);  
-    transform:scale(1);
-    -webkit-transition:.3s;
-    -moz-transition:.3s;
-    -ms-transition:.3s;
-    -o-transition:.3s;
-    transition:.3s;
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
 }
 .btn:hover img {
-    -webkit-transform:scale(1.2);
-    -moz-transform:scale(1.2);
-    -ms-transform:scale(1.2);   
-    -o-transform:scale(1.2);
-    transform:scale(1.2);
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  -o-transform: scale(1.2);
+  transform: scale(1.2);
 }
-
-
 </style>

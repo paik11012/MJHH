@@ -13,7 +13,6 @@
             <option>3</option>
             <option>2</option>
             <option>1</option>
-            <option>0</option>
           </select>
           content:
           <input type="text" v-model="modifycontent" />
@@ -51,13 +50,6 @@
           <div v-else-if="comment.score==1">
             <i class="material-icons">star</i> 
             <i class="material-icons">star_border</i>  
-            <i class="material-icons">star_border</i> 
-            <i class="material-icons">star_border</i> 
-            <i class="material-icons">star_border</i> {{ comment.content }}
-          </div>
-          <div v-else-if="comment.score==0">
-            <i class="material-icons">star_border</i> 
-            <i class="material-icons">star_border</i> 
             <i class="material-icons">star_border</i> 
             <i class="material-icons">star_border</i> 
             <i class="material-icons">star_border</i> {{ comment.content }}

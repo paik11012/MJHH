@@ -6,7 +6,7 @@ import requests
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 from datetime import datetime, timedelta
-from decouple import config
+# from decouple import config
 from pprint import pprint
 from .models import Movie, Genre, Comment
 from .serializers import MovieSerializer, GenreSerializer, CommentSerializer, UserDetailSerializer, GenreDetailSerializer, UserSerializer, UserDetailSerializer, MovieUpdateSerializer
