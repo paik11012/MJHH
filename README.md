@@ -15,7 +15,7 @@
 
 ## FRONTEND - VUE.JS
 
-- 최종 화면
+- 최종 화면 구성
 
 ![첫화면](readmepics/첫화면.PNG)
 
@@ -25,35 +25,47 @@
 
 search기능 구현 - 제목, 배우, 감독, 내용을 기반으로 검색을 할 수 있다. 
 
-```
-
-```
+### 검색 및 필터
 
 장르별로 영화들을 필터링 할 수 있다. (영화 장르 20개)
 
-디테일 페이지 만들기
+![장르선택가능](readmepics/장르선택가능.PNG)
+
+### 디테일 페이지 like, comment 기능 구현
+
+![로그인시](readmepics/로그인시.PNG)
+
+한 영화 위에 마우스 올리면 확대 기능
+
+![zoominin](readmepics/zoominin.gif)
+
+### admin은 회원정보 수정 삭제 가능, 
+
+![어드민1](readmepics/어드민1.PNG)
+
+user정보 조회 가능
+
+![](readmepics/어드민2.PNG)
+
+영화 정보 수정 가능
+
+![수정](readmepics/수정.PNG)
 
 
 
-like, comment 기능 구현(detail에)
+### 내 정보 페이지![인포1](readmepics/인포1.PNG)
 
-nav bar만들기
+내가 좋아요 한 영화 조회 가능
 
-검색기능 만들기
+![인포2](readmepics/인포2.PNG)
 
-## 11.28
+내가 단 코멘트 모아서 보기 가능(단점: 영화 제목을 알 수 없다)
 
-디테일 페이지에 코멘트 구현하기
+![인포3](readmepics/인포3.PNG)
 
-로그인 후 마이페이지 들어가게
+### 로그인하지 않았을 경우 평점달기 불가능
 
-추천 알고리즘 적용하기
-
-admin은 회원정보 수정 삭제 가능
-
-
-
-
+![로그인x](readmepics/로그인x.PNG)
 
 
 
